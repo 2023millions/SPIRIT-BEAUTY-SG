@@ -1,32 +1,150 @@
-import type { ReactNode } from "react";
+"use client";
 
-const whatsappHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%20would%20like%20to%20enquire%20about%20your%20services.";
+const whatsappHref =
+  "https://wa.me/6586950000?text=Hi%20Spirit%20Beauty%20SG%2C%20I%20would%20like%20to%20make%20an%20appointment.";
 
-function Icon({ name }: { name: "check" | "arrow" | "whatsapp" | "play" | "star" }) {
-  const paths = {
-    check: <path d="m5 12 4 4L19 6" />,
-    arrow: <><path d="M5 12h14" /><path d="m14 7 5 5-5 5" /></>,
-    whatsapp: <><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.6A9 9 0 1 1 21 11.5Z" /><path d="M8.2 7.8c.4 3.5 2.4 5.5 5.9 6.1l1.4-1.4" /></>,
-    play: <path d="m9 7 8 5-8 5V7Z" />,
-    star: <path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3Z" />,
-  };
-  return <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <section className="relative min-h-[85vh] overflow-hidden">
+        <img
+          src="/media/storefront.webp"
+          alt="Spirit Beauty SG"
+          className="absolute inset-0 h-full w-full object-cover opacity-55"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black" />
+
+        <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-6xl flex-col justify-center px-6 py-20">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-pink-300">
+            Ang Mo Kio · Singapore
+          </p>
+
+          <h1 className="max-w-4xl text-5xl font-bold leading-tight md:text-7xl">
+            Spirit Beauty SG
+          </h1>
+
+          <h2 className="mt-5 max-w-3xl text-2xl font-semibold md:text-4xl">
+            Smooth Skin. Confident You.
+          </h2>
+
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200">
+            Professional SHR IPL Hair Removal, Hair Services and Facial Care
+            in Ang Mo Kio.
+          </p>
+
+          <div className="mt-8">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full bg-green-500 px-7 py-4 font-bold text-black"
+            >
+              Book via WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-12 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-pink-300">
+            Our Services
+          </p>
+
+          <h2 className="mt-3 text-3xl font-bold md:text-5xl">
+            Beauty Care Made Simple
+          </h2>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+            <img
+              src="/media/ipl-brazilian.webp"
+              alt="SHR IPL Hair Removal"
+              className="h-72 w-full object-cover"
+            />
+
+            <div className="p-7">
+              <p className="text-sm font-semibold text-pink-300">
+                FEATURED SERVICE
+              </p>
+
+              <h3 className="mt-2 text-2xl font-bold">
+                SHR IPL Hair Removal
+              </h3>
+
+              <p className="mt-3 leading-7 text-gray-300">
+                Comfortable and convenient hair removal treatments for smoother,
+                cleaner-looking skin.
+              </p>
+
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-block font-semibold text-pink-300"
+              >
+                Book Appointment →
+              </a>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+            <img
+              src="/media/hair-bob.webp"
+              alt="Hair Services"
+              className="h-72 w-full object-cover"
+            />
+
+            <div className="p-7">
+              <p className="text-sm font-semibold text-pink-300">
+                HAIR SERVICES
+              </p>
+
+              <h3 className="mt-2 text-2xl font-bold">
+                Cut · Colour · Treatment
+              </h3>
+
+              <p className="mt-3 leading-7 text-gray-300">
+                Refresh your look with professional hair services tailored to
+                your style.
+              </p>
+
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-block font-semibold text-pink-300"
+              >
+                Enquire on WhatsApp →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-white/5">
+        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
+          <h2 className="text-3xl font-bold">Ready to book?</h2>
+
+          <p className="mt-4 text-gray-300">
+            Contact Spirit Beauty SG on WhatsApp for appointments and enquiries.
+          </p>
+
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-7 inline-block rounded-full bg-green-500 px-8 py-4 font-bold text-black"
+          >
+            WhatsApp Spirit Beauty SG
+          </a>
+        </div>
+      </section>
+    </main>
+  );
 }
-
-function CTA({ children, light=false }: { children: ReactNode; light?: boolean }) {
-  return <a href={whatsappHref} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5 ${light ? "bg-white text-ink" : "bg-[#17130d] text-[#d8b35c]"}`}><Icon name="whatsapp"/>{children}</a>;
-}
-
-function Media({ label, src, video=false, dark=false }: { label:string; src?:string; video?:boolean; dark?:boolean }) {
-  if (src) {
-    return <figure className={`overflow-hidden rounded-2xl border ${dark?"border-white/15":"border-[#d8c6a0]"}`}>
-      <img src={src} alt={label} className="aspect-square h-full w-full object-cover" />
-      <figcaption className={`px-4 py-3 text-[11px] font-semibold uppercase tracking-[.16em] ${dark?"bg-white/5 text-white/65":"bg-white text-[#725b2c]"}`}>{label}</figcaption>
-    </figure>;
-  }
-  return <div className={`grid aspect-square place-items-center overflow-hidden rounded-2xl border ${dark?"border-white/15 bg-white/5 text-white/55":"border-[#d8c6a0] bg-[#f7f0df] text-[#725b2c]"}`}><div className="flex flex-col items-center gap-3 px-5 text-center">{video?<span className="grid h-12 w-12 place-items-center rounded-full border border-current"><Icon name="play"/></span>:<span className="text-3xl">＋</span>}<span className="text-[11px] font-semibold uppercase tracking-[.18em]">{label}</span></div></div>;
-}
-
 const iplPrices=[["Upper Lip","$18"],["Underarm","$38"],["Face","$48"],["Brazilian","$48"],["Half Leg","$68"]];
 const shrBenefits=["Shaving & treatment gel included","Unlimited shots for the treatment area","Helps reduce the appearance of ingrown hairs","Fast, targeted treatment","No hard selling","No hidden costs"];
 const facialTreatments=["Dermal Control Clear-Up Treatment","Pico Laser Treatment","AOPT (Advanced Optimal Pulse Technology)","Nano Needle EMS Treatment"];
