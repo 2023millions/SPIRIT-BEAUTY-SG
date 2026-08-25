@@ -1,16 +1,11 @@
 # Spirit Beauty SG
 
-Production-ready first version of the Spirit Beauty SG website, built with Next.js, TypeScript and Tailwind CSS.
+Website for Spirit Beauty SG in Ang Mo Kio, Singapore.
 
-## Local development
+Primary focus: SHR IPL hair removal, with hair colour and facial services.
 
-```bash
-npm install
-npm run dev
-```
+Deployment target: Vercel.
 
-Open [http://localhost:3000](http://localhost:3000).
+## Current media integration
 
-## Before launch
-
-Replace the clearly labelled placeholders with the business WhatsApp number, full address, opening hours, complete service menu and original salon/treatment photography. Update `whatsappHref` in `app/page.tsx` to a `https://wa.me/...` link once the number is confirmed.
+Real storefront media is live. Real client IPL, hair colour, facial, review and video assets are being integrated into the production homepage.
