@@ -1,4 +1,5 @@
 const whatsappHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%20would%20like%20to%20enquire%20about%20your%20services.";
+const mapsHref = "https://www.google.com/maps/search/?api=1&query=Spirit%20Beauty%20Blk%20554%20Ang%20Mo%20Kio%20Ave%2010%20%2301-2044%20Singapore%20560554";
 
 const iplPrices = [
   ["Upper Lip", "$18"],
@@ -24,6 +25,13 @@ const reviews = [
   ["Hair · Josiah", "Praised the hairstylist's patience, experience and ability to understand the style a client wants."],
 ];
 
+const faqs = [
+  ["How do I book?", "Tap any WhatsApp button on this page and tell us the service you are interested in. We will reply with the available timing and current promotion."],
+  ["Is consultation available before SHR IPL?", "Yes. Suitability varies by skin type, hair type and treatment area, so consultation is recommended before treatment."],
+  ["How many SHR IPL sessions will I need?", "Hair-reduction results differ from person to person. The number and timing of sessions depend on the treatment area, hair growth cycle and individual response."],
+  ["Can I ask for a hair colour quotation first?", "Yes. Send us a clear photo of your current hair and a reference photo of the colour you want through WhatsApp."],
+];
+
 function WhatsAppButton({ label, light = false }: { label: string; light?: boolean }) {
   return (
     <a
@@ -40,8 +48,26 @@ function WhatsAppButton({ label, light = false }: { label: string; light?: boole
 }
 
 export default function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    name: "Spirit Beauty SG",
+    description: "SHR IPL hair removal, hair colour and facial services in Ang Mo Kio, Singapore.",
+    telephone: "+65 8695 2257",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Blk 554 Ang Mo Kio Ave 10 #01-2044",
+      addressLocality: "Singapore",
+      postalCode: "560554",
+      addressCountry: "SG",
+    },
+    areaServed: "Ang Mo Kio, Singapore",
+  };
+
   return (
-    <main id="top" className="overflow-x-hidden">
+    <main id="top" className="overflow-x-hidden pb-20 md:pb-0">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#17130d]/90 text-white backdrop-blur">
         <div className="container-page flex min-h-20 items-center justify-between gap-4">
           <a href="#top" className="leading-none">
@@ -53,6 +79,7 @@ export default function Home() {
             <a href="#hair">Hair</a>
             <a href="#facial">Facial</a>
             <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQ</a>
             <a href="#visit">Visit</a>
           </nav>
           <a href={whatsappHref} target="_blank" rel="noreferrer" className="rounded-full border border-[#e6c56f]/80 px-4 py-2 text-[11px] font-semibold text-[#f1dfae]">
@@ -63,22 +90,33 @@ export default function Home() {
 
       <section className="relative min-h-[760px] bg-[#17130d] text-white">
         <img src="/media/storefront.webp" alt="Spirit Beauty storefront in Ang Mo Kio" className="absolute inset-0 h-full w-full object-cover object-center" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
         <div className="container-page relative flex min-h-[760px] items-end pb-14 pt-36 sm:items-center sm:pb-0">
           <div className="max-w-3xl">
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[.25em] text-[#f1dfae]">Ang Mo Kio · Singapore</p>
+            <div className="mb-5 inline-flex rounded-full border border-[#e6c56f]/40 bg-black/25 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.2em] text-[#f1dfae]">Ang Mo Kio · Singapore</div>
             <h1 className="font-display text-[3.2rem] font-medium leading-[.92] tracking-[-.035em] sm:text-7xl lg:text-[5.5rem]">
               Smoother skin.<br />
               <span className="italic text-[#f0ddd3]">Fresh colour.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-7 text-white/85 sm:text-lg">
-              SHR IPL hair removal, whole hair colour promotions and personalised facial care — all in one welcoming neighbourhood beauty studio.
+              SHR IPL hair removal, hair colour and personalised facial care — in one neighbourhood beauty studio in Ang Mo Kio.
             </p>
             <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row">
               <WhatsAppButton label="Book via WhatsApp" light />
               <a href="#ipl" className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3.5 text-sm font-semibold">See SHR IPL promotion ↓</a>
             </div>
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/65">
+              <span>✓ Clear pricing</span><span>✓ No hard selling</span><span>✓ Direct WhatsApp booking</span>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-sand bg-white py-4">
+        <div className="container-page grid grid-cols-3 gap-2 text-center text-[10px] font-semibold uppercase tracking-[.12em] text-cocoa sm:text-xs">
+          <a href="#ipl" className="rounded-full bg-cream px-2 py-3">SHR IPL</a>
+          <a href="#hair" className="rounded-full bg-cream px-2 py-3">Hair</a>
+          <a href="#facial" className="rounded-full bg-cream px-2 py-3">Facial</a>
         </div>
       </section>
 
@@ -98,7 +136,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="ipl" className="bg-cream py-24 lg:py-32">
+      <section id="ipl" className="scroll-mt-20 bg-cream py-24 lg:py-32">
         <div className="container-page">
           <div className="max-w-3xl">
             <p className="eyebrow">Main promotion · SHR IPL</p>
@@ -136,10 +174,18 @@ export default function Home() {
               <figcaption className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-cocoa">Real client result · Brazilian IPL</figcaption>
             </figure>
           </div>
+
+          <div className="mt-14 grid gap-4 md:grid-cols-3">
+            {[['01','Message us','Tell us the treatment area you are interested in.'],['02','Check suitability','We recommend consultation because skin and hair characteristics differ.'],['03','Book your session','Choose an available timing and confirm directly through WhatsApp.']].map(([n,t,d]) => (
+              <div key={n} className="rounded-2xl border border-sand bg-white p-6">
+                <div className="text-xs font-semibold text-cocoa">{n}</div><h3 className="mt-3 font-display text-2xl">{t}</h3><p className="mt-2 text-sm leading-6 text-ink/55">{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="hair" className="bg-[#17130d] py-24 text-white lg:py-32">
+      <section id="hair" className="scroll-mt-20 bg-[#17130d] py-24 text-white lg:py-32">
         <div className="container-page">
           <div className="grid gap-10 lg:grid-cols-[1fr_.9fr] lg:items-center">
             <div>
@@ -165,7 +211,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="facial" className="py-24 lg:py-32">
+      <section id="facial" className="scroll-mt-20 py-24 lg:py-32">
         <div className="container-page grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
           <div>
             <p className="eyebrow">Facial care</p>
@@ -188,7 +234,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="reviews" className="bg-cream py-24">
+      <section id="reviews" className="scroll-mt-20 bg-cream py-24">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">Client reviews</p>
@@ -206,13 +252,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="visit" className="py-24 lg:py-32">
+      <section id="faq" className="scroll-mt-20 py-24 lg:py-28">
+        <div className="container-page grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
+          <div><p className="eyebrow">FAQ</p><h2 className="section-title">Before you book.</h2><p className="mt-5 text-sm leading-7 text-ink/55">Quick answers for first-time clients.</p></div>
+          <div className="divide-y divide-sand rounded-3xl border border-sand bg-white px-6 sm:px-8">
+            {faqs.map(([q,a]) => <details key={q} className="group py-6"><summary className="cursor-pointer list-none font-semibold">{q}<span className="float-right text-cocoa group-open:rotate-45">＋</span></summary><p className="mt-4 pr-8 text-sm leading-7 text-ink/55">{a}</p></details>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="visit" className="scroll-mt-20 bg-cream py-24 lg:py-32">
         <div className="container-page grid gap-8 lg:grid-cols-[1fr_.85fr]">
           <div>
             <p className="eyebrow">Visit Spirit Beauty</p>
             <h2 className="section-title">Blk 554 Ang Mo Kio Ave 10<br /><span className="text-cocoa">#01-2044 · Singapore 560554</span></h2>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/60">For SHR IPL, hair colour, facial appointments or price enquiries, message us directly on WhatsApp.</p>
-            <div className="mt-8"><WhatsAppButton label="Chat with Spirit Beauty" /></div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row"><WhatsAppButton label="Chat with Spirit Beauty" /><a href={mapsHref} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center rounded-full border border-cocoa px-6 py-3.5 text-sm font-semibold text-cocoa">Open Google Maps</a></div>
           </div>
           <div className="rounded-3xl bg-[#17130d] p-8 text-white">
             <p className="text-[11px] font-semibold uppercase tracking-[.2em] text-[#e6c56f]">Before you visit</p>
@@ -225,17 +280,21 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-sand bg-[#17130d] py-10 text-white">
+      <footer className="border-t border-white/10 bg-[#17130d] py-10 text-white">
         <div className="container-page flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="font-display text-2xl text-[#e6c56f]">SPIRIT BEAUTY</div>
             <p className="mt-1 text-xs text-white/50">Hair · Facial · SHR IPL Hair Removal</p>
+            <p className="mt-2 text-[11px] text-white/35">Ang Mo Kio · Singapore</p>
           </div>
-          <a href={whatsappHref} target="_blank" rel="noreferrer" className="text-sm font-semibold text-[#f1dfae]">WhatsApp us →</a>
+          <div className="flex gap-5 text-sm font-semibold text-[#f1dfae]"><a href={mapsHref} target="_blank" rel="noreferrer">Directions</a><a href={whatsappHref} target="_blank" rel="noreferrer">WhatsApp us →</a></div>
         </div>
       </footer>
 
-      <a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="Chat with Spirit Beauty on WhatsApp" className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-xl font-bold text-white shadow-lg">W</a>
+      <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-black/10 bg-white p-3 shadow-[0_-10px_30px_rgba(0,0,0,.08)] md:hidden">
+        <a href={mapsHref} target="_blank" rel="noreferrer" className="mx-1 rounded-full border border-cocoa px-4 py-3 text-center text-xs font-semibold text-cocoa">Directions</a>
+        <a href={whatsappHref} target="_blank" rel="noreferrer" className="mx-1 rounded-full bg-[#25D366] px-4 py-3 text-center text-xs font-semibold text-white">WhatsApp</a>
+      </div>
     </main>
   );
 }
