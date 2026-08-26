@@ -5,17 +5,14 @@
 html { scroll-behavior: smooth; }
 body { color: #25221f; background: #fffdf9; font-family: var(--font-body), sans-serif; }
 ::selection { background: #d8bdb0; color: #25221f; }
+a { -webkit-tap-highlight-color: transparent; }
+img { display: block; }
 .font-display { font-family: var(--font-display), serif; }
 .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-cocoa; }
 .section-title { @apply mt-3 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] sm:text-5xl lg:text-6xl; }
 .container-page { @apply mx-auto max-w-7xl px-5 sm:px-8 lg:px-10; }
 .focus-ring { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cocoa focus-visible:ring-offset-2; }
 
-/* Real Spirit Beauty storefront image. This targets the media card in the intro section. */
-main > section:nth-of-type(2) .aspect-square {
-  background-image: url('/media/storefront.webp');
-  background-size: cover;
-  background-position: center;
-  border-color: rgba(216,179,92,.45);
+@media (max-width: 380px) {
+  .container-page { padding-left: 1rem; padding-right: 1rem; }
 }
-main > section:nth-of-type(2) .aspect-square > div { display: none; }
