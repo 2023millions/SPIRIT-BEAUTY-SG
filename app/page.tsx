@@ -1,66 +1,241 @@
-import type { ReactNode } from "react";
-
 const whatsappHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%20would%20like%20to%20enquire%20about%20your%20services.";
 
-function Icon({ name }: { name: "check" | "arrow" | "whatsapp" | "play" | "star" }) {
-  const paths = {
-    check: <path d="m5 12 4 4L19 6" />,
-    arrow: <><path d="M5 12h14" /><path d="m14 7 5 5-5 5" /></>,
-    whatsapp: <><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.6A9 9 0 1 1 21 11.5Z" /><path d="M8.2 7.8c.4 3.5 2.4 5.5 5.9 6.1l1.4-1.4" /></>,
-    play: <path d="m9 7 8 5-8 5V7Z" />,
-    star: <path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3Z" />,
-  };
-  return <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
-}
-
-function CTA({ children, light=false }: { children: ReactNode; light?: boolean }) {
-  return <a href={whatsappHref} target="_blank" rel="noreferrer" className={`focus-ring inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5 ${light ? "bg-white text-ink" : "bg-[#17130d] text-[#d8b35c]"}`}><Icon name="whatsapp"/>{children}</a>;
-}
-
-function Media({ label, src, video=false, dark=false }: { label:string; src?:string; video?:boolean; dark?:boolean }) {
-  if (src) {
-    return <figure className={`overflow-hidden rounded-2xl border ${dark?"border-white/15":"border-[#d8c6a0]"}`}>
-      <img src={src} alt={label} className="aspect-square h-full w-full object-cover" />
-      <figcaption className={`px-4 py-3 text-[11px] font-semibold uppercase tracking-[.16em] ${dark?"bg-white/5 text-white/65":"bg-white text-[#725b2c]"}`}>{label}</figcaption>
-    </figure>;
-  }
-  return <div className={`grid aspect-square place-items-center overflow-hidden rounded-2xl border ${dark?"border-white/15 bg-white/5 text-white/55":"border-[#d8c6a0] bg-[#f7f0df] text-[#725b2c]"}`}><div className="flex flex-col items-center gap-3 px-5 text-center">{video?<span className="grid h-12 w-12 place-items-center rounded-full border border-current"><Icon name="play"/></span>:<span className="text-3xl">＋</span>}<span className="text-[11px] font-semibold uppercase tracking-[.18em]">{label}</span></div></div>;
-}
-
-const iplPrices=[["Upper Lip","$18"],["Underarm","$38"],["Face","$48"],["Brazilian","$48"],["Half Leg","$68"]];
-const shrBenefits=["Shaving & treatment gel included","Unlimited shots for the treatment area","Helps reduce the appearance of ingrown hairs","Fast, targeted treatment","No hard selling","No hidden costs"];
-const facialTreatments=["Dermal Control Clear-Up Treatment","Pico Laser Treatment","AOPT (Advanced Optimal Pulse Technology)","Nano Needle EMS Treatment"];
-const facialBenefits=["Blemish care","Skin rejuvenation","Appearance of acne scars","Skin hydration","Oil-control support","Appearance of enlarged pores","Collagen-supporting treatment"];
-const reviews=[
-  ["IPL · Cheryl","Professional, honest and trustworthy service. A long-time client who noticed slower hair growth after several sessions and also enjoyed the facial care."],
-  ["IPL · Alicia","Reasonable prices, visible results and great service. Highly recommended by a returning client."],
-  ["IPL & Facial · iammey","A long-time underarm and Brazilian IPL client praised the results, relaxing facial experience, clean space and no hard selling."],
-  ["Hair · Josiah","Praised the hairstylist's patience, experience and ability to understand the style a client wants."],
-  ["Hair · Karl","A returning client highlighted strong fashion sense and hairstyling skill."],
-  ["Hair · Customer Review","Recommended Spirit Beauty for patient service, careful workmanship and listening closely to the hairstyle requested."]
+const iplPrices = [
+  ["Upper Lip", "$18"],
+  ["Underarm", "$38"],
+  ["Face", "$48"],
+  ["Brazilian", "$48"],
+  ["Half Leg", "$68"],
 ];
 
-export default function Home(){
-return <main>
-<header className="absolute inset-x-0 top-0 z-20 border-b border-white/15 bg-black/25 text-white backdrop-blur-sm"><div className="container-page flex min-h-24 items-center justify-between gap-3 py-4"><a href="#top" className="focus-ring leading-none"><div className="font-display text-[1.55rem] font-semibold tracking-[.03em] text-[#d8b35c] sm:text-3xl">SPIRIT BEAUTY</div><div className="mt-1 text-[8px] uppercase tracking-[.34em] text-[#f0ddaa]">Singapore</div></a><nav className="hidden gap-7 text-[11px] font-semibold uppercase tracking-widest md:flex"><a href="#ipl">SHR IPL</a><a href="#hair">Hair</a><a href="#facial">Facial</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a></nav><a href={whatsappHref} target="_blank" rel="noreferrer" className="rounded-full border border-[#d8b35c]/80 px-4 py-2 text-[11px] font-semibold text-[#f0ddaa]">WhatsApp</a></div></header>
+const iplBenefits = [
+  "Shaving and treatment gel included",
+  "Unlimited shots for the treatment area",
+  "Fast, targeted treatment",
+  "Helps reduce the appearance of ingrown hairs",
+  "No hard selling",
+  "No hidden costs",
+];
 
-<section id="top" className="relative min-h-[760px] overflow-hidden bg-[radial-gradient(circle_at_76%_28%,rgba(222,194,126,.20),transparent_26%),linear-gradient(115deg,#282421_0%,#5f554f_48%,#96867c_100%)] text-white"><div className="container-page flex min-h-[760px] items-end pb-16 pt-40 sm:items-center sm:pb-0"><div className="max-w-3xl"><p className="mb-5 text-[11px] font-semibold uppercase tracking-[.25em] text-[#efdca7]">Ang Mo Kio · Singapore</p><h1 className="font-display text-[3.45rem] font-medium leading-[.92] tracking-[-.035em] sm:text-7xl lg:text-[6rem]">Smoother skin.<br/><span className="italic text-[#ecd9cf]">Fresh colour.</span></h1><p className="mt-7 max-w-2xl text-base leading-7 text-white/80 sm:text-lg">Discover SHR IPL hair removal, whole hair colour promotions and personalised facial care at Spirit Beauty.</p><div className="mt-8 flex flex-col gap-3 min-[400px]:flex-row"><CTA light>Book via WhatsApp</CTA><a href="#ipl" className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold">See SHR IPL promotion <Icon name="arrow"/></a></div></div></div></section>
+const reviews = [
+  ["IPL · Cheryl", "Professional, honest and trustworthy service. A long-time client who noticed slower hair growth after several sessions."],
+  ["IPL · Alicia", "Reasonable prices, visible results and great service. Highly recommended by a returning client."],
+  ["IPL & Facial · iammey", "A long-time underarm and Brazilian IPL client praised the results, relaxing facial experience and clean space."],
+  ["Hair · Josiah", "Praised the hairstylist's patience, experience and ability to understand the style a client wants."],
+];
 
-<section className="py-20 lg:py-24"><div className="container-page grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div><p className="eyebrow">Spirit Beauty · Ang Mo Kio</p><h2 className="section-title">Where Beauty<br/>Meets Expertise.</h2><p className="mt-5 text-sm leading-7 text-ink/60">Personalised beauty care, thoughtfully tailored to you. Professional <strong>SHR IPL Hair Removal, Hair & Facial services</strong> in Ang Mo Kio.</p></div><Media label="Spirit Beauty storefront" src="/media/storefront.webp"/></div></section>
+function WhatsAppButton({ label, light = false }: { label: string; light?: boolean }) {
+  return (
+    <a
+      href={whatsappHref}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5 ${
+        light ? "bg-white text-ink" : "bg-[#17130d] text-[#e6c56f]"
+      }`}
+    >
+      {label}
+    </a>
+  );
+}
 
-<section id="ipl" className="bg-cream py-24 lg:py-32"><div className="container-page"><div className="max-w-3xl"><p className="eyebrow">Main promotion · SHR IPL</p><h2 className="section-title">Smoother skin starts here.</h2><p className="mt-6 text-xl font-semibold text-cocoa">SHR · Super Hair Removal</p><p className="mt-4 leading-7 text-ink/65">SHR is an advanced light-based hair reduction technology that builds on traditional IPL. Repeated lower-energy pulses progressively warm the targeted area, allowing fast coverage and a gentler treatment experience. Suitability and results vary by individual and skin type.</p></div>
-<div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{iplPrices.map(([area,price])=><article key={area} className={`rounded-2xl border p-6 ${area==="Brazilian"?"border-[#b98b2e] bg-[#17130d] text-white":"border-sand bg-white"}`}><p className={`text-xs font-semibold uppercase tracking-widest ${area==="Brazilian"?"text-[#d8b35c]":"text-cocoa"}`}>{area}{area==="Brazilian"&&<span className="ml-2">🔥 Popular</span>}</p><div className="mt-4 font-display text-4xl">{price}</div></article>)}</div>
-<div className="mt-12 grid gap-10 lg:grid-cols-2"><div><h3 className="font-display text-3xl font-semibold">Why clients choose our SHR IPL</h3><div className="mt-6 grid gap-3 sm:grid-cols-2">{shrBenefits.map(x=><div key={x} className="flex gap-3 rounded-xl bg-white p-4 text-sm font-semibold"><span className="text-cocoa"><Icon name="check"/></span>{x}</div>)}</div><p className="mt-5 text-xs leading-5 text-ink/45">Hair-reduction results and treatment experience vary between individuals. Consultation is recommended.</p><div className="mt-7"><CTA>Book SHR IPL on WhatsApp</CTA></div></div><Media label="IPL treatment video" video/></div>
-<div className="mt-12"><p className="eyebrow">Real client results</p><div className="mt-5 grid gap-5 sm:grid-cols-2"><Media label="Brazilian IPL before & after" src="/media/ipl-brazilian.webp"/><Media label="IPL before & after 2"/></div></div></div></section>
+export default function Home() {
+  return (
+    <main id="top" className="overflow-x-hidden">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#17130d]/90 text-white backdrop-blur">
+        <div className="container-page flex min-h-20 items-center justify-between gap-4">
+          <a href="#top" className="leading-none">
+            <div className="font-display text-2xl font-semibold tracking-[.04em] text-[#e6c56f]">SPIRIT BEAUTY</div>
+            <div className="mt-1 text-[8px] uppercase tracking-[.34em] text-[#f1dfae]">Singapore</div>
+          </a>
+          <nav className="hidden items-center gap-6 text-[11px] font-semibold uppercase tracking-[.16em] md:flex">
+            <a href="#ipl">SHR IPL</a>
+            <a href="#hair">Hair</a>
+            <a href="#facial">Facial</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#visit">Visit</a>
+          </nav>
+          <a href={whatsappHref} target="_blank" rel="noreferrer" className="rounded-full border border-[#e6c56f]/80 px-4 py-2 text-[11px] font-semibold text-[#f1dfae]">
+            WhatsApp
+          </a>
+        </div>
+      </header>
 
-<section id="hair" className="bg-[#17130d] py-24 text-white lg:py-32"><div className="container-page"><p className="text-[11px] font-semibold uppercase tracking-[.24em] text-[#d8b35c]">Hair · Main promotion</p><h2 className="mt-4 max-w-3xl font-display text-5xl font-medium leading-none sm:text-6xl">Fresh colour. Fresh look.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-white/60">Whole hair colour promotions, plus special pricing for highlights and balayage.</p><div className="mt-12 grid gap-5 md:grid-cols-3">{[["Men's Whole Hair Colour","$50"],["Ladies' Whole Hair Colour","$90"],["Highlight / Balayage","From $310"]].map(([t,p])=><article key={t} className="rounded-2xl border border-[#d8b35c]/30 bg-white/5 p-7"><p className="text-xs uppercase tracking-widest text-[#d8b35c]">{t}</p><div className="mt-5 font-display text-5xl">{p}</div></article>)}</div><p className="mt-4 text-xs leading-5 text-white/45">Prices may vary for extra-long or very thick hair and services requiring additional bleaching or product. Highlight and balayage start from $310.</p><div className="mt-10 grid gap-5 md:grid-cols-3"><Media label="Latest hair colour design" src="/media/hair-bob.webp" dark/><Media label="Latest hair colour design 2" dark/><Media label="Hair colouring video" video dark/></div><div className="mt-12 grid gap-5 sm:grid-cols-2"><article className="rounded-2xl border border-white/15 p-7"><p className="text-xs uppercase tracking-widest text-[#d8b35c]">Men's Haircut + Wash</p><div className="mt-4 font-display text-4xl">$28++</div></article><article className="rounded-2xl border border-white/15 p-7"><p className="text-xs uppercase tracking-widest text-[#d8b35c]">Ladies' Haircut + Wash</p><div className="mt-4 font-display text-4xl">$38++</div><p className="mt-3 text-xs text-white/45">Price varies according to hair length and service requirements.</p></article></div><div className="mt-9"><CTA light>Ask about hair promotions</CTA></div></div></section>
+      <section className="relative min-h-[760px] bg-[#17130d] text-white">
+        <img src="/media/storefront.webp" alt="Spirit Beauty storefront in Ang Mo Kio" className="absolute inset-0 h-full w-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/25" />
+        <div className="container-page relative flex min-h-[760px] items-end pb-14 pt-36 sm:items-center sm:pb-0">
+          <div className="max-w-3xl">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[.25em] text-[#f1dfae]">Ang Mo Kio · Singapore</p>
+            <h1 className="font-display text-[3.2rem] font-medium leading-[.92] tracking-[-.035em] sm:text-7xl lg:text-[5.5rem]">
+              Smoother skin.<br />
+              <span className="italic text-[#f0ddd3]">Fresh colour.</span>
+            </h1>
+            <p className="mt-7 max-w-2xl text-base leading-7 text-white/85 sm:text-lg">
+              SHR IPL hair removal, whole hair colour promotions and personalised facial care — all in one welcoming neighbourhood beauty studio.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row">
+              <WhatsAppButton label="Book via WhatsApp" light />
+              <a href="#ipl" className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3.5 text-sm font-semibold">See SHR IPL promotion ↓</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section id="facial" className="py-24 lg:py-32"><div className="container-page"><div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]"><div><p className="eyebrow">Facial care</p><h2 className="section-title">Skin concerns deserve personalised care.</h2><p className="mt-6 text-sm leading-7 text-ink/60">Breakouts can be influenced by hormonal changes and individual lifestyle. Our therapist assesses your skin and discusses a suitable treatment approach with you.</p><div className="mt-7 rounded-2xl bg-[#17130d] p-7 text-white"><p className="text-xs uppercase tracking-widest text-[#d8b35c]">Facial Trial</p><div className="mt-3 font-display text-5xl">$88</div><div className="mt-6"><CTA light>Book facial trial</CTA></div></div></div><div className="grid gap-3">{facialTreatments.map((x,i)=><div key={x} className="flex gap-4 rounded-xl bg-cream p-5"><span className="text-xs font-semibold text-cocoa">0{i+1}</span><span className="font-semibold">{x}</span></div>)}</div></div><div className="mt-10 flex flex-wrap gap-2">{facialBenefits.map(x=><span key={x} className="rounded-full border border-sand px-4 py-2 text-xs font-semibold text-cocoa">{x}</span>)}</div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"><Media label="Facial before & after"/><Media label="Facial result"/><Media label="Facial POV video 1" video/><Media label="Facial POV video 2" video/></div></div></section>
+      <section className="py-20 lg:py-24">
+        <div className="container-page grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+          <div>
+            <p className="eyebrow">Spirit Beauty · Ang Mo Kio</p>
+            <h2 className="section-title">Where Beauty<br />Meets Expertise.</h2>
+            <p className="mt-5 text-sm leading-7 text-ink/65">
+              Personalised beauty care, thoughtfully tailored to you. Professional SHR IPL Hair Removal, Hair and Facial services in Ang Mo Kio.
+            </p>
+            <div className="mt-7"><WhatsAppButton label="Enquire now" /></div>
+          </div>
+          <figure className="overflow-hidden rounded-3xl border border-sand bg-cream shadow-soft">
+            <img src="/media/storefront.webp" alt="Spirit Beauty storefront" className="aspect-[4/3] h-full w-full object-cover" />
+          </figure>
+        </div>
+      </section>
 
-<section id="reviews" className="bg-cream py-24"><div className="container-page"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">Client reviews</p><h2 className="section-title">Trusted by clients across IPL, hair & facial.</h2><p className="mt-5 text-sm text-ink/55">Selected feedback from Spirit Beauty clients.</p></div><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{reviews.map(([t,q])=><article key={t} className="rounded-2xl bg-white p-7 shadow-soft"><div className="flex gap-1 text-[#c79f42]">{[1,2,3,4,5].map(s=><Icon key={s} name="star"/>)}</div><p className="mt-5 text-sm leading-7 text-ink/60">{q}</p><p className="mt-5 text-xs font-semibold uppercase tracking-widest text-cocoa">{t}</p></article>)}</div></div></section>
+      <section id="ipl" className="bg-cream py-24 lg:py-32">
+        <div className="container-page">
+          <div className="max-w-3xl">
+            <p className="eyebrow">Main promotion · SHR IPL</p>
+            <h2 className="section-title">Smoother skin starts here.</h2>
+            <p className="mt-5 text-xl font-semibold text-cocoa">SHR · Super Hair Removal</p>
+            <p className="mt-4 leading-7 text-ink/65">
+              SHR uses repeated lower-energy light pulses to progressively warm the treatment area for fast coverage and a gentler treatment experience. Suitability and results vary by individual and skin type.
+            </p>
+          </div>
 
-<section id="visit" className="py-24 lg:py-32"><div className="container-page grid gap-10 lg:grid-cols-2"><div><p className="eyebrow">Visit Spirit Beauty</p><h2 className="section-title">Blk 554 Ang Mo Kio Ave 10<br/><span className="text-cocoa">#01-2044 · Singapore 560554</span></h2><p className="mt-6 text-sm leading-7 text-ink/60">Coming from Ang Mo Kio MRT? Use Exit A and take Bus 88. Alight at <strong>Blk 574 — Bus Stop 54581</strong>, then cross Ang Mo Kio Ave 10 and walk towards Blk 554.</p><div className="mt-8 space-y-5">{[["1","Ang Mo Kio MRT · Exit A"],["2","Board Bus 88 at Aft Ang Mo Kio Stn Exit A · Stop 54261"],["3","Alight at Blk 574 · Stop 54581"],["4","Cross Ang Mo Kio Ave 10 and walk to Blk 554 · #01-2044"]].map(([n,t])=><div key={n} className="flex gap-4 border-b border-sand pb-5"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#17130d] text-xs font-semibold text-[#d8b35c]">{n}</span><p className="pt-2 text-sm font-semibold">{t}</p></div>)}</div><p className="mt-5 text-xs leading-5 text-ink/45">Important: 54581 is the stop for the direction from Ang Mo Kio MRT. Stop 54589 is on the opposite side of Ang Mo Kio Ave 10.</p><div className="mt-8"><CTA>WhatsApp us if you need directions</CTA></div></div><div className="rounded-3xl border border-sand bg-cream p-7"><p className="eyebrow">Simple walking map</p><div className="mt-6 rounded-2xl bg-white p-6"><div className="space-y-4 text-sm font-semibold"><div className="rounded-xl border border-sand p-4">🚌 Bus 88 · Blk 574 · Stop 54581</div><div className="text-center text-cocoa">↓ Cross Ang Mo Kio Ave 10</div><div className="rounded-xl border border-sand p-4">🚶 Walk towards Blk 554</div><div className="text-center text-cocoa">↓</div><div className="rounded-xl bg-[#17130d] p-5 text-[#d8b35c]">📍 SPIRIT BEAUTY · #01-2044</div></div></div><p className="mt-5 text-xs leading-5 text-ink/45">Address: 554 Ang Mo Kio Ave 10, #01-2044, Singapore 560554 · WhatsApp +65 8695 2257.</p></div></div></section>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {iplPrices.map(([area, price]) => (
+              <article key={area} className={`rounded-2xl border p-6 ${area === "Brazilian" ? "border-[#b98b2e] bg-[#17130d] text-white" : "border-sand bg-white"}`}>
+                <p className={`text-xs font-semibold uppercase tracking-widest ${area === "Brazilian" ? "text-[#e6c56f]" : "text-cocoa"}`}>
+                  {area}{area === "Brazilian" ? " · Popular" : ""}
+                </p>
+                <div className="mt-4 font-display text-4xl">{price}</div>
+              </article>
+            ))}
+          </div>
 
-<a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="WhatsApp Spirit Beauty" className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#1fae68] text-white shadow-lg"><Icon name="whatsapp"/></a>
-</main>;
+          <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_.9fr] lg:items-start">
+            <div>
+              <h3 className="font-display text-3xl font-semibold">Why clients choose our SHR IPL</h3>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {iplBenefits.map((item) => (
+                  <div key={item} className="rounded-xl bg-white p-4 text-sm font-semibold shadow-sm">✓ {item}</div>
+                ))}
+              </div>
+              <p className="mt-5 text-xs leading-5 text-ink/45">Hair-reduction results and treatment experience vary between individuals. Consultation is recommended.</p>
+              <div className="mt-7"><WhatsAppButton label="Book SHR IPL" /></div>
+            </div>
+            <figure className="overflow-hidden rounded-3xl border border-sand bg-white shadow-soft">
+              <img src="/media/ipl-brazilian.webp" alt="Brazilian IPL before and after result" className="w-full object-cover" />
+              <figcaption className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-cocoa">Real client result · Brazilian IPL</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="hair" className="bg-[#17130d] py-24 text-white lg:py-32">
+        <div className="container-page">
+          <div className="grid gap-10 lg:grid-cols-[1fr_.9fr] lg:items-center">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[.24em] text-[#e6c56f]">Hair · Main promotion</p>
+              <h2 className="mt-4 max-w-3xl font-display text-5xl font-medium leading-none sm:text-6xl">Fresh colour. Fresh look.</h2>
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/65">Whole hair colour promotions, plus special pricing for highlights and balayage.</p>
+              <div className="mt-8 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {[["Men's Whole Hair Colour", "$50"], ["Ladies' Whole Hair Colour", "$90"], ["Highlight / Balayage", "From $310"]].map(([title, price]) => (
+                  <article key={title} className="rounded-2xl border border-[#e6c56f]/25 bg-white/5 p-6">
+                    <p className="text-[10px] uppercase tracking-widest text-[#e6c56f]">{title}</p>
+                    <div className="mt-4 font-display text-4xl">{price}</div>
+                  </article>
+                ))}
+              </div>
+              <p className="mt-4 text-xs leading-5 text-white/45">Prices may vary for extra-long or very thick hair and services requiring additional bleaching or product.</p>
+              <div className="mt-8"><WhatsAppButton label="Ask about hair promotions" light /></div>
+            </div>
+            <figure className="overflow-hidden rounded-3xl border border-white/15 bg-white/5">
+              <img src="/media/hair-bob.webp" alt="Latest Spirit Beauty hair colour design" className="aspect-[4/5] h-full w-full object-cover" />
+              <figcaption className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#e6c56f]">Latest hair colour design</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="facial" className="py-24 lg:py-32">
+        <div className="container-page grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+          <div>
+            <p className="eyebrow">Facial care</p>
+            <h2 className="section-title">Skin concerns deserve personalised care.</h2>
+            <p className="mt-6 text-sm leading-7 text-ink/60">Our therapist assesses your skin and discusses a suitable treatment approach with you.</p>
+            <div className="mt-7 rounded-3xl bg-[#17130d] p-7 text-white">
+              <p className="text-xs uppercase tracking-widest text-[#e6c56f]">Facial Trial</p>
+              <div className="mt-3 font-display text-5xl">$88</div>
+              <div className="mt-6"><WhatsAppButton label="Book facial trial" light /></div>
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {["Dermal Control Clear-Up Treatment", "Pico Laser Treatment", "AOPT (Advanced Optimal Pulse Technology)", "Nano Needle EMS Treatment"].map((item, index) => (
+              <div key={item} className="rounded-2xl bg-cream p-6">
+                <p className="text-xs font-semibold text-cocoa">0{index + 1}</p>
+                <p className="mt-3 font-semibold leading-6">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" className="bg-cream py-24">
+        <div className="container-page">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">Client reviews</p>
+            <h2 className="section-title">Trusted across IPL, hair and facial.</h2>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {reviews.map(([title, quote]) => (
+              <article key={title} className="rounded-2xl bg-white p-7 shadow-soft">
+                <div className="text-[#c79f42]">★★★★★</div>
+                <p className="mt-5 text-sm leading-7 text-ink/60">{quote}</p>
+                <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-cocoa">{title}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="visit" className="py-24 lg:py-32">
+        <div className="container-page grid gap-8 lg:grid-cols-[1fr_.85fr]">
+          <div>
+            <p className="eyebrow">Visit Spirit Beauty</p>
+            <h2 className="section-title">Blk 554 Ang Mo Kio Ave 10<br /><span className="text-cocoa">#01-2044 · Singapore 560554</span></h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/60">For SHR IPL, hair colour, facial appointments or price enquiries, message us directly on WhatsApp.</p>
+            <div className="mt-8"><WhatsAppButton label="Chat with Spirit Beauty" /></div>
+          </div>
+          <div className="rounded-3xl bg-[#17130d] p-8 text-white">
+            <p className="text-[11px] font-semibold uppercase tracking-[.2em] text-[#e6c56f]">Before you visit</p>
+            <div className="mt-6 space-y-4 text-sm leading-6 text-white/75">
+              <p>• Appointment recommended for IPL, colour and facial services.</p>
+              <p>• Send a photo on WhatsApp if you are enquiring about hair colour or balayage.</p>
+              <p>• For IPL, tell us the treatment area so we can advise the current promotion.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-sand bg-[#17130d] py-10 text-white">
+        <div className="container-page flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="font-display text-2xl text-[#e6c56f]">SPIRIT BEAUTY</div>
+            <p className="mt-1 text-xs text-white/50">Hair · Facial · SHR IPL Hair Removal</p>
+          </div>
+          <a href={whatsappHref} target="_blank" rel="noreferrer" className="text-sm font-semibold text-[#f1dfae]">WhatsApp us →</a>
+        </div>
+      </footer>
+
+      <a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="Chat with Spirit Beauty on WhatsApp" className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-xl font-bold text-white shadow-lg">W</a>
+    </main>
+  );
 }
