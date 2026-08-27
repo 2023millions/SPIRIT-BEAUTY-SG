@@ -48,7 +48,7 @@ export default function Home(){
     </header>
 
     <section className="relative min-h-[760px] bg-[#17130d] text-white">
-      <img src="/media/IMG-20260827-WA0001.jpg" alt="Spirit Beauty storefront in Ang Mo Kio" className="absolute inset-0 h-full w-full object-cover object-[center_-0.10%]"/>
+      <img src="/media/IMG-20260827-WA0001.jpg" alt="Spirit Beauty storefront in Ang Mo Kio" className="absolute inset-0 h-full w-full object-cover object-[center_-0.50%]"/>
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/30"/>
       <div className="container-page relative flex min-h-[760px] items-end pb-14 pt-36 sm:items-center sm:pb-0"><div className="max-w-3xl">
         <div className="mb-5 inline-flex rounded-full border border-[#e6c56f]/40 bg-black/30 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.2em] text-[#f1dfae]">Ang Mo Kio · Singapore</div>
