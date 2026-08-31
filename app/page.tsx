@@ -2,8 +2,7 @@ const whatsappHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%
 const brazilianHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%20would%20like%20to%20book%20Brazilian%20SHR%20IPL%20%2448.";
 const hairHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%20would%20like%20to%20enquire%20about%20your%20hair%20colour%20promotion.";
 const facialHref = "https://wa.me/6586952257?text=Hi%20Spirit%20Beauty%2C%20I%20would%20like%20to%20book%20the%20%2488%20facial%20trial.";
-const mapsHref = "https://www.google.com/maps/search/?api=1&query=Spirit%20Beauty%20Blk%20554%20Ang%20Mo%20Kio%20Ave%2010%20%2301-2044%20Singapore%20560554";
-
+const mapsHref = "https://www.google.com/maps/dir/?api=1&destination=Spirit%20Beauty%20Blk%20554%20Ang%20Mo%20Kio%20Ave%2010%20%2301-2044%20Singapore%20560554";
 const iplPrices = [["Upper Lip","$18"],["Underarm","$38"],["Face","$48"],["Brazilian","$48"],["Half Leg","$68"]];
 const reviews = [
   ["IPL · Cheryl", "Professional, honest and trustworthy service. A long-time client who noticed slower hair growth after several sessions."],
